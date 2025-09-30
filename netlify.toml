@@ -1,8 +1,16 @@
 [build]
-  functions = "netlify/functions"
   command = "vite build"
+  publish = "dist"
+  functions = "netlify/functions"
 
+# API 프록시 (이미 있다면 유지)
 [[redirects]]
   from = "/api/*"
   to = "/.netlify/functions/:splat"
+  status = 200
+
+# 👇 이것이 핵심: 모든 경로를 index.html로
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
   status = 200
